@@ -1,0 +1,39 @@
+{
+  "status": true,
+  "statusCode": 200,
+  "data": {
+    "_id": "65328f22b48d4c6b1a28b3be",
+    "thema": {
+      "tema": "1",
+      "title": "Berkarir Sebagai Admin"
+    },
+    "questions": [
+      {
+        "question": "Gambar mana yang paling menggambarkan perasaanmu mengikuti kelas pertama?",
+        "typeInput": "radio"
+      },
+      {
+        "question": "Mengapa kamu memilih gambar itu? Silahkan tulis disini",
+        "typeInput": "textarea"
+      },
+      {
+        "question": "Apa hal yang paling menarik dari topik pembelajaran “berkarirsebagai admin”?",
+        "typeInput": "textarea"
+      },
+      {
+        "question": "Setelah belajar berkarir sebagai admin, apa hal yang membuatmu tertarik untuk belajar lagi tentang profesi admin?",
+        "typeInput": "textarea"
+      },
+      {
+        "question": "Sebelum mengikuti kelas ini, salah satu peserta bernama Ale sudah pernah belajar mengenai profesi menjadi admin. Sayangnya beberapa bulan kemudian ia lupa apa yang dipelajari karena tidak pernah mempraktekkannya. Supaya belajarmu tidak sia-sia seperti Ale, materi apa saja yang akan kamu praktekkan? Bagaimana kamu akan mempraktekkannya?",
+        "typeInput": "textarea"
+      },
+      {
+        "question": ["tes", "123"],
+        "typeInput": "checkbox"
+      }
+    ],
+    "createdAt": "2023-10-20T14:26:36.679Z",
+    "__v": 0
+  }
+}
