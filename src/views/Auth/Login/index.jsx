@@ -5,35 +5,35 @@ import { useState } from "react";
 
 const LoginView = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("")
-  const {push, query} = useRouter()
+  const [error, setError] = useState("");
+  const { push, query } = useRouter();
 
-  const callbackUrl = query.callback || "/"
+  const callbackUrl = query.callback || "/";
   const handleSubmit = async (e) => {
-    setIsLoading(true)
-    setError("")
+    setIsLoading(true);
+    setError("");
     e.preventDefault();
     const data = {
       email: e.target.email.value,
       password: e.target.password.value,
     };
-    try{
+    try {
       const res = await signIn("credentials", {
         redirect: false,
         email: e.target.email.value,
         password: e.target.password.value,
-        callbackUrl
-      })
-      if(!res?.error) {
-        setIsLoading(false)
-        push(callbackUrl)
+        callbackUrl,
+      });
+      if (!res?.error) {
+        setIsLoading(false);
+        push(callbackUrl);
       } else {
         setIsLoading(false);
-        setError("Email or Password is incorrect")
+        setError("Email or Password is incorrect");
       }
-    } catch(err) {
+    } catch (err) {
       setIsLoading(false);
-      setError("Email or Password is incorrect")
+      setError("Email or Password is incorrect");
     }
   };
   return (
@@ -66,9 +66,16 @@ const LoginView = () => {
             type="submit"
             className="bg-slate-800 text-white w-full rounded p-3 mt-4"
           >
-            {isLoading? "Loading..." : "Login"}
+            {isLoading ? "Loading..." : "Login"}
           </button>
         </form>
+        <p className="text-center">or</p>
+        <button className="w-full text-center mt-1" onClick={() => signIn("google", {
+          redirect: false,
+          callbackUrl
+        })}>
+          Sign In with Google
+        </button>
       </div>
       <p className="m-3">
         Don{"'"}t have an account? Sign Up{" "}

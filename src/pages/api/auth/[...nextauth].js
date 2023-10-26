@@ -1,7 +1,8 @@
-import { signIn } from "@/lib/firebase/services";
+import { signIn, signInWithGoogle } from "@/lib/firebase/services";
 import { compare } from "bcrypt";
 import nextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
+import GoogleProvider from "next-auth/providers/google"
 
 const authOptions = {
   session: {
@@ -34,6 +35,10 @@ const authOptions = {
         return null
       }
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_OAUTH_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET || ""
+    }),
   ],
   callbacks: {
      async jwt({token, account, user}) {
@@ -42,6 +47,30 @@ const authOptions = {
             token.email = user.email
             token.fullname = user.fullname
             token.role = user.role;
+        }
+        if(account?.provider === "google") {
+          console.log(user);
+          const data = {
+            email: user.email,
+            fullname: user.name,
+            image: user.image,
+            type: "google"
+          }
+          console.log(data);
+
+          await signInWithGoogle(data, (result) => {
+            console.log("ini dijalanin")
+            console.log(result);
+            if(result.status) {
+              token.email = result.data.email
+              token.fullname = result.data.fullname
+              token.image = result.data.image
+              token.type = result.data.type
+              token.role = result.data.role
+            }
+          })
+
+          
         }
         console.log({token, user, account});
         return token;
@@ -54,6 +83,9 @@ const authOptions = {
         }
         if ("fullname" in token) {
           session.user.fullname = token.fullname
+        }
+        if("image" in token) {
+          session.user.image = token.image
         }
         if ("role" in token) {
           session.user.role = token.role

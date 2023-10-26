@@ -6,4 +6,4 @@ export function mainMiddleware(req) {
     return res
 }
 
-export default withAuth(mainMiddleware, ['/profile', "/", "/product", "/admin"])
+export default withAuth(mainMiddleware, ["/",  '/profile', "/product", "/admin"])
